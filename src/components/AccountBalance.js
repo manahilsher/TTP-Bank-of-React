@@ -4,7 +4,7 @@ import axios from "axios";
 class AccountBalance extends Component {
   constructor(props) {
     super(props);
-    this.state = { debits: 0, credits: 0 };
+    this.state = { debits: 0, credits: 0, debitInfo: [], creditInfo: [] };
   }
 
   async componentDidMount() {
@@ -20,7 +20,15 @@ class AccountBalance extends Component {
       totalCredit += credit.amount;
     });
     console.log(totalCredit);
-    this.setState({ debits: totalDebit, credits: totalCredit });
+    this.setState({
+      debits: totalDebit,
+      credits: totalCredit,
+      debitInfo: debitRes.data,
+      creditInfo: creditRes.data
+    });
+    this.props.setAccountBalance(this.state.credits, this.state.debits);
+    this.props.setDebits(this.state.debitInfo);
+    this.props.setCredits(this.state.creditInfo);
   }
 
   render() {

@@ -14,7 +14,9 @@ class App extends Component {
       currentUser: {
         userName: "bob_loblaw",
         memberSince: "08/23/99"
-      }
+      },
+      debits: [],
+      credits: []
     };
   }
 
@@ -24,9 +26,26 @@ class App extends Component {
     this.setState({ currentUser: newUser });
   };
 
+  setDebits = (debits) => {
+    this.setState({ debits });
+  };
+
+  setCredits = (credits) => {
+    this.setState({ credits });
+  };
+
+  setAccountBalance = (credits, debits) => {
+    this.setState({ accountBalance: (credits - debits).toFixed(2) });
+  };
+
   render() {
     const HomeComponent = () => (
-      <Home accountBalance={this.state.accountBalance} />
+      <Home
+        accountBalance={this.state.accountBalance}
+        setAccountBalance={this.setAccountBalance}
+        setDebits={this.setDebits}
+        setCredits={this.setCredits}
+      />
     );
     const UserProfileComponent = () => (
       <UserProfile
@@ -42,7 +61,12 @@ class App extends Component {
         {...this.props}
       />
     );
-    const DebitsComponent = () => <Debits />;
+    const DebitsComponent = () => (
+      <Debits
+        accountBalance={this.state.accountBalance}
+        debitInfo={this.state.debits}
+      />
+    );
 
     return (
       <Router>
