@@ -15,36 +15,46 @@ class App extends Component {
         userName: "bob_loblaw",
         memberSince: "08/23/99"
       },
-      debits: [],
-      credits: []
+      debitInfo: null,
+      creditInfo: null
     };
   }
 
-  mockLogin = (logInInfo) => {
+  mockLogin = (loginInfo) => {
     const newUser = { ...this.state.currentUser };
-    newUser.userName = logInInfo.userName;
+    newUser.userName = loginInfo.userName;
     this.setState({ currentUser: newUser });
   };
 
-  setDebits = (debits) => {
-    this.setState({ debits });
+  setDebitInfo = (debitInfo) => {
+    this.setState({ debitInfo });
   };
 
-  setCredits = (credits) => {
-    this.setState({ credits });
+  addDebit = (newDebit, accountBalance) => {
+    let a = this.state.debitInfo.slice();
+    a.push(newDebit);
+    this.setState({
+      debitInfo: a,
+      accountBalance: accountBalance
+    });
   };
 
-  setAccountBalance = (credits, debits) => {
-    this.setState({ accountBalance: (credits - debits).toFixed(2) });
+  setCreditInfo = (creditInfo) => {
+    this.setState({ creditInfo });
+  };
+
+  setAccountBalance = (newBalance) => {
+    this.setState({ accountBalance: newBalance });
   };
 
   render() {
     const HomeComponent = () => (
       <Home
         accountBalance={this.state.accountBalance}
+        debitInfo={this.state.debitInfo}
         setAccountBalance={this.setAccountBalance}
-        setDebits={this.setDebits}
-        setCredits={this.setCredits}
+        setDebitInfo={this.setDebitInfo}
+        setCreditInfo={this.setCreditInfo}
       />
     );
     const UserProfileComponent = () => (
@@ -64,7 +74,8 @@ class App extends Component {
     const DebitsComponent = () => (
       <Debits
         accountBalance={this.state.accountBalance}
-        debitInfo={this.state.debits}
+        debitInfo={this.state.debitInfo}
+        addDebit={this.addDebit}
       />
     );
 

@@ -1,7 +1,19 @@
 .App {
   text-align: center;
+  margin: 0 5% 5% 5%;
 }
 
 img {
   width: 30%;
+}
+
+.card {
+  width: 18rem;
+  margin: 1%;
+}
+
+.card-header {
+  background-color: rgb(13, 46, 13);
+  color: white;
+  font-weight: bold;
 }

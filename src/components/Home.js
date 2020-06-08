@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import AccountBalance from "./AccountBalance.js";
-import Debits from "./Debits";
 import { Link } from "react-router-dom";
 import "../App.css";
 
@@ -18,9 +17,10 @@ class Home extends Component {
 
         <AccountBalance
           accountBalance={this.props.accountBalance}
+          debitInfo={this.props.debitInfo}
           setAccountBalance={this.props.setAccountBalance}
-          setDebits={this.props.setDebits}
-          setCredits={this.props.setCredits}
+          setDebitInfo={this.props.setDebitInfo}
+          setCreditInfo={this.props.setCreditInfo}
         />
 
         <Link to="/debits">Debits</Link>
