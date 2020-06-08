@@ -10,7 +10,8 @@ class Debits extends Component {
       accountBalance: this.props.accountBalance,
       amount: 0,
       description: "",
-      date: {}
+      date: {},
+      debitCards: false
     };
   }
 
@@ -51,19 +52,8 @@ class Debits extends Component {
     );
   };
 
-  setRender = () => {
-    const allDebits = this.state.debitInfo.map((debit) => {
-      return (
-        <div className="card">
-          <div className="card-header">${debit.amount}</div>
-          <ul className="list-group list-group-flush">
-            <li className="list-group-item">{debit.description}</li>
-            <li className="list-group-item">{debit.date}</li>
-          </ul>
-        </div>
-      );
-    });
-    return allDebits;
+  renderDebits = () => {
+    return this.props.renderDebits(this.state.debitInfo);
   };
 
   render() {
@@ -71,10 +61,7 @@ class Debits extends Component {
       <div className="App">
         <Link to="/">Home</Link>
         <h1 style={{ color: "red" }}>Debits</h1>
-        <AccountBalance
-          debitInfo={this.state.debitInfo}
-          accountBalance={this.state.accountBalance}
-        />
+        <AccountBalance accountBalance={this.state.accountBalance} />
         <div className="ui segment">
           <form className="ui form">
             <div className="field">
@@ -101,7 +88,7 @@ class Debits extends Component {
             ></input>
           </form>
         </div>
-        <div className="row">{this.setRender()}</div>
+        <div className="row">{this.renderDebits()}</div>
       </div>
     );
   }

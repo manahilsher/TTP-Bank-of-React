@@ -15,15 +15,11 @@ class Home extends Component {
 
         <Link to="/userProfile">User Profile</Link>
 
-        <AccountBalance
-          accountBalance={this.props.accountBalance}
-          debitInfo={this.props.debitInfo}
-          setAccountBalance={this.props.setAccountBalance}
-          setDebitInfo={this.props.setDebitInfo}
-          setCreditInfo={this.props.setCreditInfo}
-        />
+        <AccountBalance accountBalance={this.props.accountBalance} />
 
         <Link to="/debits">Debits</Link>
+        <br></br>
+        <Link to="/credits">Credits</Link>
       </div>
     );
   }
